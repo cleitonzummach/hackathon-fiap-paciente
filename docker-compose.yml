@@ -1,0 +1,44 @@
+# Usage:
+# docker compose -f docker-compose.yml up --build
+# docker compose -f docker-compose.yml down
+
+services:
+  api_paciente:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5001:8080
+    depends_on:
+      - db_paciente
+    environment:
+      - POSTGRES_HOST=db_paciente
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=hackathon_paciente
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123!asd
+    networks:
+      - hackathon_rede
+
+  db_paciente:
+    image: postgres:13
+    hostname: db_paciente
+    environment:
+      - POSTGRES_HOST=db_paciente
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=hackathon_paciente
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123!asd
+    ports:
+      - 54321:5432
+    networks:
+      - hackathon_rede
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  hackathon_rede:
+    external: true
+
+volumes:
+  postgres_data:

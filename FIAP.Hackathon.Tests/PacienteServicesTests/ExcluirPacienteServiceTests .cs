@@ -14,7 +14,7 @@ namespace FIAP.Hackathon.Tests.PacienteServicesTests
             Paciente pacienteExistente = new Paciente("Nome", "CPF", DateTime.UtcNow, "Endereco", "Cidade", "Estado", "CEP", "email@email.com", "senha");
             pacienteExistente.PacienteId = _pacienteId;
             _mockPacienteRepository.Setup(repo => repo.RetornarPorId(_pacienteId)).Returns(pacienteExistente);
-            _mockPacienteRepository.Setup(repo => repo.Excluir(It.IsAny<Paciente>())).Returns(true);
+            _mockPacienteRepository.Setup(repo => repo.Editar(It.IsAny<Paciente>())).Returns(true);
 
             // Act
             var resultado = _pacienteService.ExcluirPaciente(_pacienteId);
@@ -29,7 +29,7 @@ namespace FIAP.Hackathon.Tests.PacienteServicesTests
             // Arrange
             Paciente pacienteExistente = new Paciente("Nome", "CPF", DateTime.UtcNow, "Endereco", "Cidade", "Estado", "CEP", "email@email.com", "senha");
             _mockPacienteRepository.Setup(repo => repo.RetornarPorId(_pacienteId)).Returns(pacienteExistente);
-            _mockPacienteRepository.Setup(repo => repo.Excluir(It.IsAny<Paciente>())).Returns(false);
+            _mockPacienteRepository.Setup(repo => repo.Editar(It.IsAny<Paciente>())).Returns(false);
 
             // Act
             var resultado = _pacienteService.ExcluirPaciente(_pacienteId);

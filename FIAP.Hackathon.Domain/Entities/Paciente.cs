@@ -28,5 +28,10 @@
             Email = email;
             Senha = senha;
         }
+
+        public void Excluir() 
+        {
+            DataExclusao = DateTime.UtcNow;
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace FIAP.Hackathon.Infrastructure.Repositories
             return _context.Paciente.FirstOrDefault(x => x.PacienteId == id);
         }
 
+        public IEnumerable<Paciente>? RetornarTodos()
+        {
+            return _context.Paciente.Where(x => !x.DataExclusao.HasValue).ToList();
+        }
+
         public Paciente? ValidarLogin(string email, string senha)
         {
             return _context.Paciente.FirstOrDefault(x => x.Email == email && x.Senha == senha);
@@ -41,20 +46,6 @@ namespace FIAP.Hackathon.Infrastructure.Repositories
         {
             try
             {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
-        public bool Excluir(Paciente paciente)
-        {
-            try
-            {
-                _context.Remove(paciente);
                 _context.SaveChanges();
                 return true;
             }

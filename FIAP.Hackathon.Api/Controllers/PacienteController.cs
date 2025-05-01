@@ -91,5 +91,13 @@ namespace FIAP.Hackathon.Paciente.Controllers
             var paciente = _pacienteService.RetornarPorId(pacienteId);
             return Ok(paciente);
         }
+
+        [AllowAnonymous]
+        [HttpGet()]
+        public IActionResult RetornarPacientes()
+        {
+            var paciente = _pacienteService.RetornarTodos();
+            return Ok(paciente);
+        }
     }
 }

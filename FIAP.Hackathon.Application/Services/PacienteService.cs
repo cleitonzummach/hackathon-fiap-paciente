@@ -4,6 +4,7 @@ using FIAP.Hackathon.Application.Responses;
 using FIAP.Hackathon.Domain.Entities;
 using FIAP.Hackathon.Domain.Repositories;
 using System.Globalization;
+using System.Linq;
 
 namespace FIAP.Hackathon.Application.Services
 {
@@ -76,7 +77,8 @@ namespace FIAP.Hackathon.Application.Services
 
                 if (paciente != null)
                 {
-                    return _pacienteRepository.Excluir(paciente);
+                    paciente.Excluir();
+                    return _pacienteRepository.Editar(paciente);
                 }
 
                 return false;
@@ -93,6 +95,16 @@ namespace FIAP.Hackathon.Application.Services
 
             if (paciente != null)
                 return new PacienteResponse(paciente);
+
+            return null;
+        }
+
+        public IEnumerable<PacienteResponse>? RetornarTodos()
+        {
+            var pacientes = _pacienteRepository.RetornarTodos();
+
+            if (pacientes != null)
+                return pacientes.Select(paciente => new PacienteResponse(paciente));
 
             return null;
         }

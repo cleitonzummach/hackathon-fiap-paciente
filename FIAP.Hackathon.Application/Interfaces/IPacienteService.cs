@@ -9,5 +9,6 @@ namespace FIAP.Hackathon.Application.Interfaces
         bool EditarPaciente(Guid pacienteId, PacienteRequest request);
         bool ExcluirPaciente(Guid pacienteId);
         PacienteResponse? RetornarPorId(Guid pacienteId);
+        IEnumerable<PacienteResponse>? RetornarTodos();
     }
 }
