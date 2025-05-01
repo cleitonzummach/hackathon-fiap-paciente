@@ -1,0 +1,6 @@
+@FIAP.Hackathon.Paciente_HostAddress = http://localhost:5126
+
+GET {{FIAP.Hackathon.Paciente_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
